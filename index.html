@@ -3,46 +3,70 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Adhvaga Ledger | Multi-Device</title>
+    <title>Adhvaga Ledger | 50-30-20 Tracker</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
 <div class="app-container">
     <header>
-        <h1>Wealth Ledger</h1>
-        <div class="salary-input-group">
-            <label>Monthly Salary</label>
-            <input type="number" id="salaryInput" placeholder="Enter Salary">
+        <h1>Adhvaga Wealth Ledger</h1>
+        <div class="header-controls">
+            <div class="input-group">
+                <label>Active Month</label>
+                <select id="monthSelect" onchange="updateUI()">
+                    <option value="January">January</option>
+                    <option value="February">February</option>
+                    <option value="March">March</option>
+                    <option value="April">April</option>
+                    <option value="May">May</option>
+                    <option value="June">June</option>
+                    <option value="July">July</option>
+                    <option value="August">August</option>
+                    <option value="September">September</option>
+                    <option value="October">October</option>
+                    <option value="November">November</option>
+                    <option value="December">December</option>
+                </select>
+            </div>
+            <div class="input-group">
+                <label>Monthly Salary (₹)</label>
+                <input type="number" id="salaryInput" placeholder="Ex: 50000">
+            </div>
         </div>
     </header>
 
+    <div id="budgetInsight" class="insight-box">
+        <span id="insightIcon">💡</span>
+        <p id="insightText">Enter your salary and expenses to see your 50/30/20 breakdown.</p>
+    </div>
+
     <div class="dashboard">
         <div class="card needs">
-            <span class="card-label">Needs (50%)</span>
-            <div class="card-val" id="sumNeeds">0</div>
-            <div class="card-footer"><span id="perNeeds">0%</span></div>
+            <span class="card-label">Needs (Target 50%)</span>
+            <div class="card-val" id="sumNeeds">₹0</div>
+            <div class="card-footer" id="perNeeds">0%</div>
         </div>
         <div class="card desires">
-            <span class="card-label">Desires (30%)</span>
-            <div class="card-val" id="sumDesires">0</div>
-            <div class="card-footer"><span id="perDesires">0%</span></div>
+            <span class="card-label">Desires (Target 30%)</span>
+            <div class="card-val" id="sumDesires">₹0</div>
+            <div class="card-footer" id="perDesires">0%</div>
         </div>
         <div class="card savings">
-            <span class="card-label">Savings (20%)</span>
-            <div class="card-val" id="sumSavings">0</div>
-            <div class="card-footer"><span id="perSavings">0%</span></div>
+            <span class="card-label">Savings (Target 20%)</span>
+            <div class="card-val" id="sumSavings">₹0</div>
+            <div class="card-footer" id="perSavings">0%</div>
         </div>
         <div class="card grand-total" id="totalCard">
-            <span class="card-label">Grand Total</span>
-            <div class="card-val" id="sumTotal">0</div>
-            <div class="card-footer"><span id="perTotal">0% used</span></div>
+            <span class="card-label">Total Spent</span>
+            <div class="card-val" id="sumTotal">₹0</div>
+            <div class="card-footer" id="perTotal">0% Used</div>
         </div>
     </div>
 
     <div class="entry-form">
         <div class="form-group">
-            <label>Type</label>
+            <label>Category</label>
             <select id="type" onchange="updatePresets()">
                 <option value="Need">Need</option>
                 <option value="Desire">Desire</option>
@@ -54,28 +78,37 @@
             <select id="desc"></select>
         </div>
         <div class="form-group">
-            <label>Amount</label>
+            <label>Amount (₹)</label>
             <input type="number" id="amt" placeholder="0.00">
         </div>
-        <button id="addBtn" class="btn-primary">Add Entry</button>
+        <button id="addBtn">Add Entry</button>
     </div>
 
     <div class="data-section">
-        <div class="desktop-only">
+        <div class="desktop-view">
             <table>
                 <thead>
-                    <tr><th>Description</th><th>Type</th><th>Amount</th><th>Action</th></tr>
+                    <tr><th>Item</th><th>Type</th><th>Amount</th><th>Action</th></tr>
                 </thead>
                 <tbody id="ledgerTableBody"></tbody>
             </table>
         </div>
-        <div class="mobile-only" id="ledgerListBody">
-            </div>
+        <div class="mobile-view" id="ledgerListBody"></div>
     </div>
 
-    <div class="actions">
-        <button id="exportBtn" class="btn-sec">Export to Excel</button>
-        <button id="resetBtn" class="btn-danger">Clear Month</button>
+    <div class="yearly-summary">
+        <h3>2026 Annual Overview</h3>
+        <div class="summary-grid">
+            <div class="summary-item"><span>Total Saved</span><strong id="yearlySavings">₹0</strong></div>
+            <div class="summary-item"><span>Total Needs</span><strong id="yearlyNeeds">₹0</strong></div>
+            <div class="summary-item"><span>Total Desires</span><strong id="yearlyDesires">₹0</strong></div>
+        </div>
+    </div>
+
+    <div class="footer-actions">
+        <button id="exportBtn" class="btn-export">Export Annual Excel (.csv)</button>
+        <button id="resetBtn" class="btn-clear">Clear Current Month</button>
+        <button id="forceResetBtn" class="btn-danger-all">Force Reset All Data (Fix Errors)</button>
     </div>
 </div>
 
