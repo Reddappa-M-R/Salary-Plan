@@ -1,0 +1,51 @@
+:root {
+    --primary: #1c1c1e; --blue: #007aff; --orange: #ff9500; --green: #34c759; --red: #ff3b30;
+    --bg: #f2f2f7; --white: #ffffff;
+}
+
+body { font-family: -apple-system, sans-serif; background: var(--bg); margin: 0; padding: 15px; }
+
+/* Desktop Structure */
+.app-container { max-width: 1000px; margin: auto; }
+header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+.salary-input-group input { padding: 10px; border-radius: 8px; border: 1px solid #ccc; font-weight: bold; width: 180px; }
+
+/* Dashboard: Mobile First (2x2) */
+.dashboard { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 25px; }
+.card { padding: 15px; border-radius: 12px; color: white; }
+.needs { background: var(--red); } .desires { background: var(--orange); }
+.savings { background: var(--green); } .grand-total { background: var(--blue); }
+.card-label { font-size: 0.75rem; text-transform: uppercase; opacity: 0.8; }
+.card-val { font-size: 1.4rem; font-weight: bold; margin: 5px 0; }
+.card-footer { font-size: 0.8rem; font-weight: 600; }
+
+/* Form: Mobile First (Vertical) */
+.entry-form { display: flex; flex-direction: column; gap: 12px; background: var(--white); padding: 20px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
+.form-group label { display: block; font-size: 0.8rem; margin-bottom: 5px; font-weight: bold; }
+select, input { width: 100%; height: 45px; border: 1px solid #ddd; border-radius: 8px; padding: 0 10px; font-size: 1rem; box-sizing: border-box; }
+.btn-primary { height: 50px; background: var(--blue); color: white; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; }
+
+/* Toggle Visibility */
+.mobile-only { display: block; }
+.desktop-only { display: none; }
+
+/* DESKTOP VIEW (Screens wider than 768px) */
+@media (min-width: 768px) {
+    .dashboard { grid-template-columns: repeat(4, 1fr); }
+    .entry-form { flex-direction: row; align-items: flex-end; }
+    .form-group { flex: 1; }
+    .mobile-only { display: none; }
+    .desktop-only { display: block; }
+    
+    table { width: 100%; border-collapse: collapse; background: white; border-radius: 12px; overflow: hidden; margin-top: 20px; }
+    th { text-align: left; padding: 15px; background: #f8f8f8; }
+    td { padding: 15px; border-top: 1px solid #eee; }
+}
+
+/* Mobile List Row Styling */
+.list-item { background: white; padding: 15px; border-radius: 10px; margin-top: 10px; display: flex; justify-content: space-between; align-items: center; }
+.list-info span { display: block; }
+.list-name { font-weight: bold; }
+.list-cat { font-size: 0.75rem; color: #888; }
+.btn-danger { background: none; border: none; color: var(--red); font-weight: bold; cursor: pointer; margin-top: 15px; width: 100%; }
+.btn-sec { width: 100%; padding: 15px; background: #e5e5ea; border: none; border-radius: 8px; font-weight: bold; margin-top: 20px; cursor: pointer; }

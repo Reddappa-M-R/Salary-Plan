@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Adhvaga Ledger | Multi-Device</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="app-container">
+    <header>
+        <h1>Wealth Ledger</h1>
+        <div class="salary-input-group">
+            <label>Monthly Salary</label>
+            <input type="number" id="salaryInput" placeholder="Enter Salary">
+        </div>
+    </header>
+
+    <div class="dashboard">
+        <div class="card needs">
+            <span class="card-label">Needs (50%)</span>
+            <div class="card-val" id="sumNeeds">0</div>
+            <div class="card-footer"><span id="perNeeds">0%</span></div>
+        </div>
+        <div class="card desires">
+            <span class="card-label">Desires (30%)</span>
+            <div class="card-val" id="sumDesires">0</div>
+            <div class="card-footer"><span id="perDesires">0%</span></div>
+        </div>
+        <div class="card savings">
+            <span class="card-label">Savings (20%)</span>
+            <div class="card-val" id="sumSavings">0</div>
+            <div class="card-footer"><span id="perSavings">0%</span></div>
+        </div>
+        <div class="card grand-total" id="totalCard">
+            <span class="card-label">Grand Total</span>
+            <div class="card-val" id="sumTotal">0</div>
+            <div class="card-footer"><span id="perTotal">0% used</span></div>
+        </div>
+    </div>
+
+    <div class="entry-form">
+        <div class="form-group">
+            <label>Type</label>
+            <select id="type" onchange="updatePresets()">
+                <option value="Need">Need</option>
+                <option value="Desire">Desire</option>
+                <option value="Savings">Savings</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label>Description</label>
+            <select id="desc"></select>
+        </div>
+        <div class="form-group">
+            <label>Amount</label>
+            <input type="number" id="amt" placeholder="0.00">
+        </div>
+        <button id="addBtn" class="btn-primary">Add Entry</button>
+    </div>
+
+    <div class="data-section">
+        <div class="desktop-only">
+            <table>
+                <thead>
+                    <tr><th>Description</th><th>Type</th><th>Amount</th><th>Action</th></tr>
+                </thead>
+                <tbody id="ledgerTableBody"></tbody>
+            </table>
+        </div>
+        <div class="mobile-only" id="ledgerListBody">
+            </div>
+    </div>
+
+    <div class="actions">
+        <button id="exportBtn" class="btn-sec">Export to Excel</button>
+        <button id="resetBtn" class="btn-danger">Clear Month</button>
+    </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
